@@ -1,18 +1,30 @@
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Photos from "./components/Photos";
+import Photos2 from "./components/Photos2";
+import Layout from "./components/Layout";
+import NoPage from "./components/Nopage";
+import Home from "./components/Home";
+import Contact from "./components/Contact";
+// This site has 3 pages, all of which are rendered
+// dynamically in the browser (not server rendered).
+//
+// Although the page does not ever refresh, notice how
+// React Router keeps the URL up to date as you navigate
+// through the site. This preserves the browser history,
+// making sure things like the back button and bookmarks
+// work properly.
 
-function App() {
-  return (
-    <div >
-        <h1>Hello..</h1>
-        <ul>
-          <div>Mohitha<img src={require('./Mohitha.jpg')}  alt="Mohitha" width="300" height="400"/></div>
-          <div>Jishaan <img src={require('./Jishaan.jpeg')}  alt="Jishaan"width="400" height="400"/></div>
-          <div>Veera <img src={require('./Veera.jpeg')}  alt="Veera"width="300" height="400"/></div>
-          <div>Divya <img src={require('./Divya.jpeg')}  alt="Divya"width="300" height="400"/></div>
-          <div>VeeraDivya <img src={require('./VeeraDivya.jpeg')}  alt="VeeraDivya"width="500" height="400"/></div>
-          </ul>
-      </div>
+export default function App() {
+  return ( <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/photos" element={<Photos />} />
+        <Route path="/photos2" element={<Photos2 />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NoPage />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
   );
 }
-
-export default App;
